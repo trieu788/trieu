@@ -1,0 +1,35 @@
+<div class="mt-4">
+  <div class="tab">
+    <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="/create/category">Category</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/create/product">Product</a>
+    </li>
+    </ul>
+  </div>
+
+<div class="mt-4">
+    <form method="POST" action="/create/category" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">ID</label>
+        <input type="text" class="form-control" id="input-proid" name="cateid">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Name</label>
+        <input type="text" class="form-control" id="input-proName" name="catename">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Image</label>
+        <input type="file" class="form-control" id="input-proprice" name="cateimg">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Is Show</label>
+        <input type="checkbox" class="form-check-input" id="input-isshow" name="isshow" checked>
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-success mb-3">Submit</button>
+    </div>
+    </form>
+</div>

@@ -1,0 +1,109 @@
+<div class="mt-4">
+  <div class="tab">
+    <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="/view/categories">Category</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/view/products">Product</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/view/orders">Order</a>
+    </li>
+    </ul>
+  </div>
+  <div>
+    <h1>Products ATN</h1>
+    <a href="/recovery/deleted/products"><button type="button" class="btn btn-warning">Recovery</button></a>
+  </div>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Image</th>
+      <th scope="col">Specification</th>
+      <th scope="col">Descriptions</th>
+      <th scope="col">Is Show</th>
+      <th scope="col">Category</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+          {{#each product}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <th scope="row">{{this.proid}}</th>
+      <th scope="row">{{this.proname}}</th>
+      <th scope="row">{{this.proprice}}</th>
+      <th scope="row" style="width: 100px; max-width: 100px; white-space:nowrap; overflow:hidden"><img width="90" src="/{{this.proimg}}"></th>
+      <th scope="row">{{this.prospecification}}</th>
+      <th scope="row">{{this.prodescription}}</th>
+      <th scope="row">{{this.isshow}}</th>
+      <th scope="row">{{this.cateid}}</th>
+      <td>
+        <a href="/update/exist/product/{{this.proid}}"><button type="button" class="btn btn-primary">Edit</button></a>
+        <a href="#"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#btn-delete-product" data-bs-id="{{this.proid}}">Delete</button></a>
+      </td>
+    </tr>
+        {{else}}
+    <tr>
+      <td colspan="5" class="text-center">
+          Bạn Chưa Thêm Sản Phẩm Nào! 
+          <a href="/create/product"><button type="button" class="btn btn-success">Thêm Sản Phẩm</button></a>
+      </td>
+    </tr>
+        {{/each}}
+  </tbody>
+    </table>
+</div>
+
+{{!-- Delete Modal --}}
+<div class="modal fade" id="btn-delete-product" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">Xóa Sản Phẩm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn Có Muốn Xóa Sản Phẩm Này Không?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="btn-delete-click">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Hidden form delete --}}
+    <form method="POST" id="delete-form-hidden"></form>
+
+{{!-- Get Id from Event Delete --}}
+<script>
+    var id;
+    var deleteform = document.forms['delete-form-hidden']
+    var delete_event = document.getElementById('btn-delete-product')
+    delete_event.addEventListener('show.bs.modal', function (event) {
+    // Button that triggered the modal
+    var button = event.relatedTarget
+    // Extract info from data-bs-* attributes
+    id = button.getAttribute('data-bs-id')
+    })
+    
+  var buttonDeleteClick = document.getElementById('btn-delete-click')
+  buttonDeleteClick.onclick = function () {
+
+    var buttonDeletePost = document.getElementById('btn-delete-product')
+    buttonDeletePost.onclick = function () {
+      deleteform.action = '/delete/product/' + id + '?_method=DELETE'
+      deleteform.submit()
+
+    }
+  }
+
+</script>

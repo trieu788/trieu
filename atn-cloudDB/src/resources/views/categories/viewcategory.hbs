@@ -1,0 +1,101 @@
+<div class="mt-4">
+  <div class="tab">
+    <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="/view/categories">Category</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/view/products">Product</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/view/orders">Order</a>
+    </li>
+    </ul>
+  </div>
+  <div>
+    <h1>Categories ATN</h1>
+    <a href="/recovery/deleted/categories"><button type="button" class="btn btn-warning">Recovery</button></a>
+  </div>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Image</th>
+      <th scope="col">Is Show</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+          {{#each category}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>{{this.cateid}}</td>
+      <td>{{this.catename}}</td>
+      <td scope="row" style="width: 100px; max-width: 100px; white-space:nowrap; overflow:hidden"><img width="90" src="/{{this.cateimg}}"></td>
+      <td>{{this.isshow}}</td>
+      <td>
+        <a href="/update/category/{{this.cateid}}"><button type="button" class="btn btn-primary">Edit</button></a>
+        <a href="#"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#btn-delete-category" data-bs-id="{{this.cateid}}">Delete</button></a>
+      </td>
+    </tr>
+        {{else}}
+    <tr>
+      <td colspan="5" class="text-center">
+          Bạn Chưa Thêm Danh Mục Sản Phẩm Nào! 
+          <a href="/create/category"><button type="button" class="btn btn-success">Thêm Danh Mục Sản Phẩm</button></a>
+      </td>
+    </tr>
+        {{/each}}
+  </tbody>
+    </table>
+</div>
+
+{{!-- Delete Modal --}}
+<div class="modal fade" id="btn-delete-category" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">Xóa Sản Phẩm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn Có Muốn Xóa Sản Phẩm Này Không?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="btn-delete-click">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Hidden form delete --}}
+    <form method="POST" id="delete-form-hidden"></form>
+
+{{!-- Get Id from Event Delete --}}
+<script>
+    var id;
+    var deleteform = document.forms['delete-form-hidden']
+    var delete_event = document.getElementById('btn-delete-category')
+    delete_event.addEventListener('show.bs.modal', function (event) {
+    // Button that triggered the modal
+    var button = event.relatedTarget
+    // Extract info from data-bs-* attributes
+    id = button.getAttribute('data-bs-id')
+    })
+    
+  var buttonDeleteClick = document.getElementById('btn-delete-click')
+  buttonDeleteClick.onclick = function () {
+
+    var buttonDeletePost = document.getElementById('btn-delete-category')
+    buttonDeletePost.onclick = function () {
+      deleteform.action = '/delete/category/' + id + '?_method=DELETE'
+      deleteform.submit()
+
+    }
+  }
+
+</script>

@@ -1,0 +1,66 @@
+<div class="mt-4">
+  <div class="tab">
+    <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="/view/categories">Category</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/view/products">Product</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/view/orders">Order</a>
+    </li>
+    </ul>
+  </div>
+  <div>
+    {{#each orderdetails}}
+    <h1>Order Details {{this.orderid}}</h1>
+    {{/each}}
+    <a href="/view/orders"><button type="button" class="btn btn-success">Return</button></a>
+  </div>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Customer</th>
+      <th scope="col">Product</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Payment</th>
+      <th scope="col">Total</th>
+      <th scope="col">More</th>
+    </tr>
+  </thead>
+  <tbody>
+          {{#each orderdetails}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+          {{/each}}
+      {{#each customer}}
+      <td>{{this.cusname}}</td>
+      {{/each}}
+      {{#each product}}
+      <td>{{this.proname}}</td>
+      {{/each}}
+      {{#each orderdetails}}
+      <td>{{this.quantity}}</td>
+      {{/each}}
+      {{#each payment}}
+      <td>{{this.pmethod}}</td>
+      <td>{{this.total}} $</td>
+      {{/each}}
+                    {{#each orderdetails}}
+      <td>
+        <a href="/view/invoice/order/{{this.orderid}}"><button type="button" class="btn btn-secondary">Invoice</button></a>
+      </td>
+    </tr>
+        {{else}}
+    <tr>
+      <td colspan="5" class="text-center">
+          Order Details Empty!
+      </td>
+    </tr>
+        {{/each}}
+  </tbody>
+    </table>
+</div>

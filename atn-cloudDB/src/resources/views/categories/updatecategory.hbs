@@ -1,0 +1,25 @@
+<div class="mt-4">
+        {{#each category}}
+    <form method="POST" action="/update/category/{{this.cateid}}?_method=PUT" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">ID</label>
+        <input type="text" class="form-control" id="input-proid" name="cateid" value="{{this.cateid}}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Name</label>
+        <input type="text" class="form-control" id="input-proName" name="catename" value="{{this.catename}}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Image</label>
+        <input type="file" class="form-control" id="input-proprice" name="cateimg" value="{{this.cateimg}}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Is Show</label>
+        <input type="checkbox" class="form-check-input" id="input-isshow" name="isshow" checked="{{this.isshow}}">
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-success mb-3">Submit</button>
+    </div>
+    </form>
+        {{/each}}
+</div>

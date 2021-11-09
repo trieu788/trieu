@@ -1,0 +1,50 @@
+<div class="mt-4">
+    {{#each product}}
+    <form method="POST" action="/update/product/{{this.proid}}?_method=PUT" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">ID</label>
+
+        <input type="text" class="form-control" id="input-proid" name="proid" value="{{this.proid}}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Product Name</label>
+        <input type="text" class="form-control" id="input-proName" name="proname" value="{{this.proname}}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Price</label>
+        <input type="text" class="form-control" id="input-proprice" name="proprice" value="{{this.proprice}}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Image</label>
+        <input type="file" class="form-control" id="input-proimage" name="proimg" value="{{this.proimg}}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Specification</label>
+        {{!-- <input class="form-control" for="product-specification" id="input-prospecification" name="prospecification" value="{{this.prospecification}}"> --}}
+        <textarea row="8" cols="50"  class="form-control" id="input-prospecification" name="prospecification">{{this.prospecification}}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Descriptions</label>
+        <input type="text" class="form-control" id="input-prodescriptions" name="prodescription" value="{{this.prodescription}}">
+    </div>
+    {{/each}}
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Category</label>
+        <select class="form-select" aria-label="Default select example" name="cateid" id="select-categoryid">
+            <option selected disabled>-- Select Category --</option>
+                {{#each category}}
+            <option value="{{this.cateid}}">{{this.catename}}</option>
+                {{/each}}
+        </select>
+    </div>
+    {{#each product}}
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Is Show</label>
+        <input type="checkbox" class="form-check-input" id="input-isshow" name="isshow" checked="{{this.isshow}}">
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-success mb-3" id="sub-btn">Submit</button>
+    </div>
+    </form>
+    {{/each}}
+</div>

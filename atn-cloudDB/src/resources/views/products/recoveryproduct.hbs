@@ -1,0 +1,107 @@
+<div class="mt-4">
+  <div>
+    <h1>RECOVERY PRODUCT ATN</h1>
+    <a href="/view/products"><button type="button" class="btn btn-success">Quay Về</button></a>
+  </div>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Image</th>
+      <th scope="col">Specification</th>
+      <th scope="col">Descriptions</th>
+      <th scope="col">Is Show</th>
+      <th scope="col">Category</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+          {{#each product}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <th scope="row">{{this.proid}}</th>
+      <th scope="row">{{this.proname}}</th>
+      <th scope="row">{{this.proprice}}</th>
+      <th scope="row"><img src="/{{this.proimg}}" width="90"></th>
+      <th scope="row">{{this.prospecification}}</th>
+      <th scope="row">{{this.prodescription}}</th>
+      <th scope="row">{{this.isshow}}</th>
+      <th scope="row">{{this.cateid}}</th>
+      <td>
+        <button type="button" class="btn btn-info btn-restore" data-id="{{this.proid}}">Khôi Phục</button>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#btn-delete-product" data-bs-id="{{this.proid}}">Xóa Vĩnh Viễn</button>
+      </td>
+    </tr>
+        {{else}}
+    <tr>
+      <td colspan="5" class="text-center">
+          Empty Recovery Product 
+          <a href="/view/products"><button type="button" class="btn btn-success">Return</button></a>
+      </td>
+    </tr>
+        {{/each}}
+  </tbody>
+    </table>
+</div>
+
+{{!-- Delete Modal --}}
+<div class="modal" tabindex="-1" id="btn-delete-product">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xóa Sản Phẩm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn Có Chắc Chắn Muốn Xóa Sản Phẩm Không?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="button" class="btn btn-danger" id="btn-delete-click">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Hidden form delete --}}
+    <form method="POST" id="delete-form-hidden"></form>
+    <form method="POST" id="restore-form-hidden"></form>
+
+{{!-- Get Id from Event Delete --}}
+<script>
+  var id;
+  var deleteform = document.forms['delete-form-hidden']
+  var delete_event = document.getElementById('btn-delete-product')
+  var restoreform = document.forms['restore-form-hidden']
+  var restoreBtn = $('.btn-restore');
+  delete_event.addEventListener('show.bs.modal', function (event) {
+  // Button that triggered the modal
+  var button = event.relatedTarget
+  // Extract info from data-bs-* attributes
+  id = button.getAttribute('data-bs-id')
+})
+
+  var buttonDeleteClick = document.getElementById('btn-delete-click')
+  buttonDeleteClick.onclick = function () {
+
+    var buttonDeletePost = document.getElementById('btn-delete-product')
+    buttonDeletePost.onclick = function () {
+      deleteform.action = '/forcedelete/product/' + id + '?_method=DELETE'
+      deleteform.submit()
+    }
+
+  }
+
+  
+  restoreBtn.click(function(e){
+    e.preventDefault();
+
+    var id = $(this).data('id')
+    restoreform.action = '/restore/product/' + id + '?_method=PATCH';
+    restoreform.submit()
+  })
+</script>

@@ -1,0 +1,49 @@
+<div class="mt-4">
+  <div class="tab">
+    <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="/view/categories">Category</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/view/products">Product</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/view/orders">Order</a>
+    </li>
+    </ul>
+  </div>
+  <div>
+    <h1>Orders ATN</h1>
+  </div>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Date</th>
+      <th scope="col">Status</th>
+      <th scope="col">More</th>
+    </tr>
+  </thead>
+  <tbody>
+          {{#each orderproduct}}
+    <tr>
+      <th scope="row">{{sum @index 1}}</th>
+      <td>{{this.orderid}}</td>
+      <td>{{this.orderdate}}</td>
+      <td>{{this.status}}</td>
+      <td>
+       <a href="/view/orders/{{this.orderid}}"><button type="button" class="btn btn-info">Details</button></a>
+      </td>
+    </tr>
+        {{else}}
+    <tr>
+      <td colspan="5" class="text-center">
+          Order Empty!
+      </td>
+    </tr>
+        {{/each}}
+  </tbody>
+    </table>
+</div>

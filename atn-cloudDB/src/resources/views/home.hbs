@@ -1,0 +1,24 @@
+<div class="mt-4">
+    <div class="row">
+
+        {{#each product}}
+        <div class="col-sm-6 col-lg-3">
+            <div class="card card-posts-item" style="width: 18rem;">
+                <a href="/product/details/{{this.proid}}">
+                    <img src="{{this.proimg}}" class="card-img-top" alt="...">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{this.proname}}</h5>
+                    <p class="card-text">{{this.prodescription}}</p>
+                    <p class="card-text text-end">{{this.proprice}}$</p>
+                    <a href="/product/details/{{this.proid}}" class="btn btn-primary card-link float-end">View Details</a>
+                    <form method="POST" action="/addtocart/product/{{this.proid}}">
+                        <input type="hidden" name="proid" value="{{this.proid}}">
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+
+    </div>
+</div>

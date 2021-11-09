@@ -1,0 +1,23 @@
+<div class="mt-4">
+    {{#each product}}
+    <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <p><a href="/" style="text-decoration: none; color:black">Home</a> / <a href="/product/details/{{this.proid}}" style="text-decoration: none; color:red">Product Details</a></p>
+    </div>
+    </nav>
+    <div class="row">
+        <div class="col-lg-3">
+            <h1>Details</h1>
+        </div>
+        <div class="col-lg-3">
+            <h2>{{this.proname}}</h2>
+            <img src="/{{this.proimg}}" alt="" style="width: 300px; height: 300px" id="myimg">
+            <p>{{this.prospecification}}</p>
+            <a href="/product/order/{{this.proid}}"><button type="button" class="btn btn-primary" style="width: 100px; float:right; margin-right: 5px">Order</button></a>
+        </div>
+        <div class="col-lg-6">
+            <p style="padding-top: 40px;">{{this.prodescription}}</p>
+        </div>
+    </div>
+    {{/each}}
+</div>
